@@ -1,0 +1,20 @@
+<!-- xmlns: Sets the default XML namespace -->
+<!-- xmlns:xsi: Declares the 'xsi' prefix for schema info -->
+<!-- xsi:schemaLocation: Tells tools where to find the schema definition for validation -->
+
+<CycloneDDS
+  xmlns="https://cdds.io/config"                             
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"      
+  xsi:schemaLocation="https://cdds.io/config https://raw.githubusercontent.com/eclipse-cyclonedds/cyclonedds/master/etc/cyclonedds.xsd"
+>
+
+  <!-- Applies to all domains -->
+  <Domain Id="any">
+
+    <!-- General settings for all domains -->
+    <General>
+      <AllowMulticast>true</AllowMulticast>
+    </General>
+
+  </Domain>
+</CycloneDDS>

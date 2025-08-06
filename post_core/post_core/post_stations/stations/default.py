@@ -2,7 +2,7 @@ from ..base import Station
 from ..registry import register_station
 from ...post_instruction_sets.registry import get_instruction_set
 from post_interfaces.msg import Parcel
-from ...post_instruction_sets.types import InstructionResult, InstructionSignal
+from ...post_instruction_sets.types import InstructionSignal
 
 @register_station("default")
 class DefaultStation(Station):
