@@ -26,7 +26,7 @@ setup(
             'loopback_station = post_stations.loopback_station:main',
             'two_station_test = post_stations.two_station_test:main',
             'sender_receiver_test = post_tests.run_sender_receiver_test:main',
-            'dynamic_loop_publisher = post_tests.dynamic_loop_publisher:main'
+            'dynamic_loop_test = post_tests.run_dynamic_loop_test:main'
         ],
     },
 )

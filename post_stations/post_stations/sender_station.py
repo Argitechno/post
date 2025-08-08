@@ -1,8 +1,5 @@
-import sys
 import uuid
 import random
-import rclpy
-from rclpy.node import Node
 from post_stations.base_station import BaseStation
 
 class SenderStation(BaseStation):
@@ -13,6 +10,10 @@ class SenderStation(BaseStation):
         self.mode = args.mode
         self.send_interval_sec = args.send_interval_sec
         self.max_parcels = args.max_parcels
+
+        self.declare_parameter('instruction_set_key', 'default')
+        self.declare_parameter('parcel_data_keys', ['message'])
+        self.declare_parameter('parcel_data_vals', ['Hello from SenderStation'])
 
         self.sent_count = 0
         self.round_robin_index = 0
@@ -71,14 +72,24 @@ class SenderStation(BaseStation):
             self.timer.cancel()
 
     def _create_parcel(self):
+        instruction_set_key = self.get_parameter('instruction_set_key').get_parameter_value().string_value
+
+        keys = self.get_parameter('parcel_data_keys').get_parameter_value().string_array_value
+        vals = self.get_parameter('parcel_data_vals').get_parameter_value().string_array_value
+
+        # Build data dictionary from keys and vals (assumes string values)
+        data = {}
+        for k, v in zip(keys, vals):
+            data[k] = v
+
+        # Add a timestamp always
+        data['timestamp'] = str(self.get_clock().now().to_msg().sec)
+
         return {
             "id": str(uuid.uuid4()),
             "owner_id": self.get_name(),
-            "instruction_set_key": "default",
-            "data": {
-                "message": "Hello from SenderStation",
-                "timestamp": self.get_clock().now().to_msg().sec,
-            },
+            "instruction_set_key": instruction_set_key,
+            "data": data,
         }
 
     def inject_parcel(self, parcel):
