@@ -13,7 +13,7 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
     ],
-    install_requires=['setuptools'],
+    install_requires=['setuptools', 'post_instruction_sets'],
     zip_safe=True,
     maintainer='todo',
     maintainer_email='todo@todo.todo',

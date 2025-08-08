@@ -1,5 +1,5 @@
-from post_stations.base_station import BaseStation
-from post_stations.parcel_utils import parcel_msg_to_dict
+from post_stations import BaseStation
+from post_stations import parcel_msg_to_dict
 
 class ReceiverStation(BaseStation):
     def __init__(self, name,  qos_profile, args):
@@ -15,7 +15,7 @@ class ReceiverStation(BaseStation):
 
 
 def main():
-    from post_stations.station_running import main_template
+    from post_stations import main_template
     main_template(ReceiverStation, "receiver_station")
 
 if __name__ == "__main__":

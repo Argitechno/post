@@ -1,6 +1,6 @@
 import uuid
 import random
-from post_stations.base_station import BaseStation
+from post_stations import BaseStation
 
 class SenderStation(BaseStation):
     def __init__(self, name, qos_profile, args):
@@ -97,7 +97,7 @@ class SenderStation(BaseStation):
         self.get_logger().info(f"[{self.get_name()}] Injected parcel {parcel['id']}")
 
 def main():
-    from post_stations.station_running import main_template
+    from post_stations import main_template
     def add_sender_args(parser):
         parser.add_argument('--mode', default='broadcast_once', choices=['broadcast_once', 'round_robin', 'random'])
         parser.add_argument('--destinations', required=True, help="Comma-separated list of destination station names")
