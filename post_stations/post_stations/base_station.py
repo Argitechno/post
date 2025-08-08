@@ -1,12 +1,13 @@
 from rclpy.node import Node
 from queue import Queue
-
+from rclpy.qos import QoSProfile
 from post_msgs.msg import Parcel
 from .parcel_utils import parcel_msg_to_dict, dict_to_parcel_msg
 
 class BaseStation(Node):
-    def __init__(self, name):
+    def __init__(self, name, qos_profile: QoSProfile):
         super().__init__(name)
+        self.qos_profile = qos_profile
         self.parcel_queue = Queue()
 
         # Subscribe to incoming parcels
@@ -14,14 +15,14 @@ class BaseStation(Node):
             Parcel,
             f"stations/{self.get_name()}/incoming_parcels",
             self._parcel_callback,
-            10
+            self.qos_profile
         )
 
         self._pub_cache = {}
 
     def _get_publisher(self, topic):
         if topic not in self._pub_cache :
-            self._pub_cache[topic] = self.create_publisher(Parcel, topic, 10)
+            self._pub_cache[topic] = self.create_publisher(Parcel, topic, self.qos_profile)
         return self._pub_cache[topic]
 
     def _parcel_callback(self, msg):

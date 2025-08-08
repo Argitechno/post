@@ -11,7 +11,10 @@ def generate_launch_description():
             executable='processing_station',
             name=name,
             output='screen',
-            arguments=[name],
+            arguments=[
+                '--loss_mode', 'lossy',
+                '--depth', '10'
+            ]
         )
         for name in station_names
     ]

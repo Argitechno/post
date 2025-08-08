@@ -3,8 +3,6 @@ import time
 import uuid
 
 import rclpy
-from rclpy.node import Node
-from rclpy.executors import SingleThreadedExecutor
 from post_msgs.msg import Parcel
 from post_stations.processing_station import ProcessingStation
 from post_stations.parcel_utils import dict_to_parcel_msg

@@ -3,8 +3,8 @@ from post_instruction_sets import instruction_sets
 from post_stations.parcel_utils import parcel_msg_to_dict
 
 class ProcessingStation(BaseStation):
-    def __init__(self, name):
-        super().__init__(name)
+    def __init__(self, name,  qos_profile, args):
+        super().__init__(name, qos_profile)
 
     def _parcel_callback(self, msg):
         parcel = parcel_msg_to_dict(msg)
@@ -20,23 +20,8 @@ class ProcessingStation(BaseStation):
         instr(parcel, self)
 
 def main():
-    import rclpy
-    import asyncio
-
-    rclpy.init()
-    node = ProcessingStation("processing_station")
-    async def runner():
-        try:
-            while rclpy.ok():
-                rclpy.spin_once(node, timeout_sec=float(0))
-                await asyncio.sleep(0.001)  # Small delay for async tasks
-        except SystemExit:
-            rclpy.logging.get_logger("Quitting").info('Done')
-        finally:
-            node.destroy_node()
-            rclpy.shutdown()
-
-    asyncio.run(runner())
+    from post_stations.station_running import main_template
+    main_template(ProcessingStation, "processing_station")
 
 if __name__ == "__main__":
     main()
