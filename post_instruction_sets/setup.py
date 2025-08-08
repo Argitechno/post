@@ -1,13 +1,11 @@
-from setuptools import setup #,find_packages
+from setuptools import find_packages, setup
 
-package_name = 'post_stations'
+package_name = 'post_instruction_sets'
 
 setup(
     name=package_name,
     version='0.0.1',
     packages=[package_name],
-    #find_packages(exclude=['test']),
-    py_modules=[],
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
@@ -17,14 +15,11 @@ setup(
     zip_safe=True,
     maintainer='todo',
     maintainer_email='todo@todo.todo',
-    description='Reusable base station logic for POST system',
+    description='Instruction sets for parcel processing',
     license='MIT',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'receiver_station = post_stations.receiver_station:main',
-            'sender_station = post_stations.sender_station:main',
-            'processing_station = post_stations.processing_station:main'
-        ]
-    }
+        ],
+    },
 )
