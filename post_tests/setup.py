@@ -11,8 +11,7 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         ('share/post_tests/launch', ['launch/dynamic_loop_test_launch.py']),
-        ('share/post_tests/launch', ['launch/receiver_sender_test_launch.py'])
-
+        ('share/post_tests/launch', ['launch/receiver_sender_test_launch.py']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -23,8 +22,6 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'loopback_station = post_stations.loopback_station:main',
-            'two_station_test = post_stations.two_station_test:main',
             'sender_receiver_test = post_tests.run_sender_receiver_test:main',
             'dynamic_loop_test = post_tests.run_dynamic_loop_test:main'
         ],
